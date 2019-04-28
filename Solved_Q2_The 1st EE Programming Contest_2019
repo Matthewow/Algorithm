@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+void Q2() {
+	int dic[10000];
+	dic[0] = 0;
+	for (int i = 1; i < 10000; i++) {
+		dic[i] = i + dic[i - 1];
+	}
+	
+	int x, y, r, x1, y1, x2, y2, r1, r2, iter;
+	iter = 0;
+	cin >> iter;
+	int result[100000];
+	int count = 0;
+	while (iter > 0) {
+		cin >> x >> y;
+		for (int i = 0; i < 10000; i++) {
+			if (dic[i] >= x) {
+				x1 = i - (dic[i] - x);
+				x2 = 1 + (dic[i] - x);
+				break;
+			}
+		}
+		for (int i = 0; i < 10000; i++) {
+			if (dic[i] >= y) {
+				y1 = i - (dic[i] - y);
+				y2 = 1 + (dic[i] - y);
+				break;
+			}
+		}
+
+		r1 = x1 + y1;
+		r2 = x2 + y2;
+
+		int temp = r1 + r2 - 1;
+		r = dic[temp] - (temp - r1);
+		result[count++] = r;
+		iter--;
+	}
+	for (int i = 0; i < count; i++) {
+		cout << result[i] << endl;
+	}
+
+}
+
+
+
+int main() {
+	Q2();
+	return 0;
+}
